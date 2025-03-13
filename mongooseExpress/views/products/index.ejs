@@ -14,7 +14,7 @@
     </head>
     <body>
         <h1>
-            All Products!
+            <%= category %> Products!
         </h1>
 
         <ul>
@@ -26,7 +26,9 @@
         </ul>
 
         <a href="/products/new">New Product</a>
-        
+        <%if(category !== 'All') { %>
+        <a href="/products">All Products</a>
+        <% } %>
         <script src="" async defer></script>
     </body>
 </html>
