@@ -16,8 +16,10 @@
 
         <ul>
             <% for(let farm of farms) { %>
-                <li>
-                    <%=farm.name%>
+                <li> 
+                    <a href="/farms/<%=farm._id%>">
+                        <%=farm.name%>
+                    </a>
                 </li>
             <% } %>
         </ul>
