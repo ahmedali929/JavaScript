@@ -33,7 +33,6 @@ app.get('/farms/new', (req, res) => {
     res.render('farms/new')
 })
 
-//adding a show route
 app.get('/farms/:id', async(req, res) => {
     const farm = await Farm.findById(req.params.id)
     res.render('farms/show', {farm})
@@ -45,7 +44,22 @@ app.post('/farms', async (req, res) => {
     res.redirect('/farms');
 })
 
+app.get('/farms/:id/products/new', (req, res) => {
+    const { id } = req.params;
+    res.render('products/new', { categories, id })
+})
 
+app.post('/farms/:id/products', async(req, res) => {
+    const { id } = req.params;
+    const farm = await Farm.findById(id);
+    const { name, price, category } = req.body;
+    const product = new Product({ name, price, category});
+    product.farm = farm;
+    farm.products.push(product);
+    await farm.save();
+    await product.save();
+    res.send(farm);
+})
 
 // PRODUCT ROUTES
 
